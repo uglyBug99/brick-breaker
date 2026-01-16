@@ -1,0 +1,295 @@
+/* ========================================
+   霓虹裂痕 (Neon Rift) - 样式表
+   ======================================== */
+
+/* CSS 变量 - 霓虹色调主题 */
+:root {
+    --bg-dark: #0a0a0f;
+    --bg-darker: #050508;
+    --neon-cyan: #00f5ff;
+    --neon-pink: #ff00ff;
+    --neon-purple: #bf00ff;
+    --neon-orange: #ff6b00;
+    --neon-green: #39ff14;
+    --neon-yellow: #ffff00;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --glow-intensity: 20px;
+}
+
+/* 全局重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Noto Sans SC', 'Orbitron', sans-serif;
+    background: var(--bg-darker);
+}
+
+/* 游戏容器 */
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 50%, #0f0a1a 100%);
+}
+
+/* 游戏画布 */
+#gameCanvas {
+    display: block;
+    background: transparent;
+    touch-action: none;
+}
+
+/* 浮层基础样式 */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(5, 5, 10, 0.92);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.overlay.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 浮层内容区 */
+.overlay-content {
+    text-align: center;
+    padding: 40px;
+    max-width: 90%;
+}
+
+/* 游戏 Logo */
+.game-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 900;
+    margin-bottom: 10px;
+    letter-spacing: 0.1em;
+}
+
+.logo-neon {
+    color: var(--neon-cyan);
+    text-shadow: 
+        0 0 10px var(--neon-cyan),
+        0 0 20px var(--neon-cyan),
+        0 0 40px var(--neon-cyan),
+        0 0 80px var(--neon-cyan);
+    animation: neonPulse 2s ease-in-out infinite alternate;
+}
+
+.logo-rift {
+    color: var(--neon-pink);
+    text-shadow: 
+        0 0 10px var(--neon-pink),
+        0 0 20px var(--neon-pink),
+        0 0 40px var(--neon-pink),
+        0 0 80px var(--neon-pink);
+    animation: neonPulse 2s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes neonPulse {
+    from {
+        filter: brightness(1);
+    }
+    to {
+        filter: brightness(1.3);
+    }
+}
+
+/* 副标题 */
+.game-subtitle {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--text-secondary);
+    letter-spacing: 0.5em;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+/* 游戏说明 */
+.instructions {
+    margin-bottom: 40px;
+}
+
+.instructions p {
+    color: var(--text-primary);
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    margin: 15px 0;
+    opacity: 0.9;
+}
+
+/* 霓虹按钮 */
+.neon-btn {
+    font-family: 'Orbitron', 'Noto Sans SC', sans-serif;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    font-weight: 700;
+    padding: 18px 60px;
+    border: 2px solid var(--neon-cyan);
+    background: transparent;
+    color: var(--neon-cyan);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 0 10px rgba(0, 245, 255, 0.3),
+        inset 0 0 10px rgba(0, 245, 255, 0.1);
+}
+
+.neon-btn:hover {
+    background: var(--neon-cyan);
+    color: var(--bg-dark);
+    box-shadow: 
+        0 0 20px var(--neon-cyan),
+        0 0 40px var(--neon-cyan),
+        0 0 60px var(--neon-cyan);
+    transform: scale(1.05);
+}
+
+.neon-btn:active {
+    transform: scale(0.98);
+}
+
+/* 按钮闪光效果 */
+.neon-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.neon-btn:hover::before {
+    left: 100%;
+}
+
+/* 结算界面标题 */
+.end-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2rem, 7vw, 4rem);
+    font-weight: 900;
+    margin-bottom: 30px;
+    letter-spacing: 0.1em;
+}
+
+.end-title.win {
+    color: var(--neon-green);
+    text-shadow: 
+        0 0 10px var(--neon-green),
+        0 0 20px var(--neon-green),
+        0 0 40px var(--neon-green);
+}
+
+.end-title.lose {
+    color: var(--neon-pink);
+    text-shadow: 
+        0 0 10px var(--neon-pink),
+        0 0 20px var(--neon-pink),
+        0 0 40px var(--neon-pink);
+}
+
+/* 结算统计 */
+.end-stats {
+    margin-bottom: 40px;
+}
+
+.end-stats p {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    color: var(--text-primary);
+    margin: 15px 0;
+}
+
+.end-stats span {
+    color: var(--neon-yellow);
+    text-shadow: 0 0 10px var(--neon-yellow);
+}
+
+/* 关卡过渡界面 */
+.level-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 900;
+    color: var(--neon-purple);
+    text-shadow: 
+        0 0 10px var(--neon-purple),
+        0 0 20px var(--neon-purple),
+        0 0 40px var(--neon-purple);
+    margin-bottom: 20px;
+}
+
+.level-title span {
+    color: var(--neon-orange);
+    text-shadow: 
+        0 0 10px var(--neon-orange),
+        0 0 20px var(--neon-orange),
+        0 0 40px var(--neon-orange);
+}
+
+.level-subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+}
+
+/* 响应式适配 */
+@media (max-width: 600px) {
+    .overlay-content {
+        padding: 20px;
+    }
+    
+    .neon-btn {
+        padding: 15px 40px;
+    }
+    
+    .instructions p {
+        margin: 10px 0;
+    }
+}
+
+/* 禁用用户选择 */
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}

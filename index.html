@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="弹弹乐 - 一款现代霓虹风格的弹球消除游戏，挑战你的反应速度！">
+    <title>弹弹乐 | Bounce Joy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+SC:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- 游戏画布容器 -->
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- 开始界面浮层 -->
+        <div id="start-overlay" class="overlay">
+            <div class="overlay-content">
+                <h1 class="game-logo">
+                    <span class="logo-neon">弹弹</span>
+                    <span class="logo-rift">乐</span>
+                </h1>
+                <p class="game-subtitle">BOUNCE JOY</p>
+                <div class="instructions">
+                    <p>🖱️ 鼠标/触摸 控制挡板</p>
+                    <p>🎯 击碎所有方块即可过关</p>
+                    <p>❤️ 初始3条命，小心别让球落下！</p>
+                </div>
+                <button id="start-btn" class="neon-btn">开始游戏</button>
+            </div>
+        </div>
+
+        <!-- 结算界面浮层 -->
+        <div id="end-overlay" class="overlay hidden">
+            <div class="overlay-content">
+                <h1 id="end-title" class="end-title">GAME OVER</h1>
+                <div class="end-stats">
+                    <p>关卡: <span id="end-level">1</span></p>
+                    <p>最终得分: <span id="end-score">0</span></p>
+                </div>
+                <button id="restart-btn" class="neon-btn">再玩一次</button>
+            </div>
+        </div>
+
+        <!-- 关卡过渡界面 -->
+        <div id="level-overlay" class="overlay hidden">
+            <div class="overlay-content">
+                <h1 class="level-title">关卡 <span id="level-number">1</span></h1>
+                <p class="level-subtitle">准备好了吗？</p>
+                <button id="next-level-btn" class="neon-btn">开始</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
